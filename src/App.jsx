@@ -46,6 +46,9 @@ const App = () => {
       console.log("No authorized account found");
     }
   }
+  const getTotalNFTsMintedSoFar = async () => {
+
+  }
   /*
   * Implement your connectWallet method here
   */
@@ -60,7 +63,15 @@ const App = () => {
       console.log("Connected", accounts[0]);
       setCurrentAccount(accounts[0])
       setupEventListener()
-    } catch(error) {
+      let chainId = await ethereum.request({ method: 'eth_chainId' });
+      console.log("Connected to chain " + chainId);
+
+// String, hex code of the chainId of the Rinkebey test network
+      const rinkebyChainId = "0x4"; 
+      if (chainId !== rinkebyChainId) {
+	      alert("You are not connected to the Rinkeby Test Network!");
+      }
+      } catch(error) {
       console.log(error)
     }
   }
