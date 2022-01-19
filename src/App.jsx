@@ -8,7 +8,7 @@ import { ethers } from 'ethers';
 // Constants
 const TWITTER_HANDLE = 'Evans Kimathi';
 const TWITTER_LINK = `https://twitter.com/dedanxkim`;
-const OPENSEA_LINK = '';
+const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-jfbuitq3tu';
 const TOTAL_MINT_COUNT = 50;
 
 const CONTRACT_ADDRESS ="0xb418963989dbF10820325C44d55948582c0EC4e5";
@@ -63,6 +63,10 @@ const App = () => {
     } catch(error) {
       console.log(error)
     }
+  }
+
+  const openCollection = () => {
+    window.open(OPENSEA_LINK);
   }
 
   const setupEventListener = async () => {
@@ -141,6 +145,9 @@ const App = () => {
             Mint NFT
             </button>
           )}
+          <div>
+          <button onClick={openCollection} className="cta-button-Collection connect-wallet-button">View My NFT Collection</button>
+          </div>
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />

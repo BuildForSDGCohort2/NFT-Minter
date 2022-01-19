@@ -48,6 +48,20 @@
   color: white;
 }
 
+.cta-button-Collection {
+  height: 45px;
+  border: 0;
+  width: auto;
+  padding-left: 40px;
+  margin-top: 40px;
+  padding-right: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
 .connect-wallet-button {
   background: -webkit-linear-gradient(left, #60c657, #35aee2);
   background-size: 200% 200%;
