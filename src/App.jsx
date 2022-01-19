@@ -11,7 +11,7 @@ const TWITTER_LINK = `https://twitter.com/dedanxkim`;
 const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-jfbuitq3tu';
 const TOTAL_MINT_COUNT = 50;
 
-const CONTRACT_ADDRESS ="0xb418963989dbF10820325C44d55948582c0EC4e5";
+const CONTRACT_ADDRESS ="0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 const App = () => {
 
