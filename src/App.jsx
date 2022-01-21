@@ -11,12 +11,13 @@ const TWITTER_LINK = `https://twitter.com/dedanxkim`;
 const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-jfbuitq3tu';
 const TOTAL_MINT_COUNT = 50;
 
-const CONTRACT_ADDRESS ="0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const CONTRACT_ADDRESS ="0xDd05EEe818953FfA0391d0250BdE0b43F6275ae5";
 
 const App = () => {
 
   const [currentAccount, setCurrentAccount] = useState("");
   const [isLoading, setIsLoading] = useState(false)
+  const [totalNfts, setTotalNfts] = useState('');
   const checkIfWalletIsConnected = async() => {
     /*
     * First make sure we have access to window.ethereum
@@ -46,9 +47,7 @@ const App = () => {
       console.log("No authorized account found");
     }
   }
-  const getTotalNFTsMintedSoFar = async () => {
-
-  }
+  
   /*
   * Implement your connectWallet method here
   */
@@ -102,8 +101,10 @@ const App = () => {
     }
   }
 
+  
+
   const askContractToMintNft = async() => {
-    const CONTRACT_ADDRESS ="0xb418963989dbF10820325C44d55948582c0EC4e5";
+    const CONTRACT_ADDRESS ="0xDd05EEe818953FfA0391d0250BdE0b43F6275ae5";
 
     try {
       const {ethereum} = window;
@@ -128,6 +129,23 @@ const App = () => {
       console.log(error)
     }
   }
+
+  const getTotalNFTsMintedSoFar = async () => {
+    try{
+      const {ethereum } = window;
+      if(ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, MyEpicNft.abi, signer);
+
+        let totalNfts = await connectedContract.getTotalNFTsMinted();
+        setTotalNfts(totalNfts.toNumber())
+      } 
+    }catch(error){
+        console.log(error)
+      }
+
+  }
   // Render Methods
   const renderNotConnectedContainer = () => (
     <button onClick={connectWallet} className="cta-button connect-wallet-button">
@@ -138,7 +156,8 @@ const App = () => {
   *This runs our function when the page loads
   */
   useEffect(() => {
-    checkIfWalletIsConnected();
+    checkIfWalletIsConnected(),
+    getTotalNFTsMintedSoFar()
   }, [])
 
   return (
@@ -149,6 +168,7 @@ const App = () => {
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
           </p>
+          <p className="sub-text">Total NftsMinted so far {totalNfts}/{TOTAL_MINT_COUNT}</p>
           {currentAccount === "" ? 
             renderNotConnectedContainer()
           : (
@@ -156,6 +176,7 @@ const App = () => {
             Mint NFT
             </button>
           )}
+          
           <div>
           <button onClick={openCollection} className="cta-button-Collection connect-wallet-button">View My NFT Collection</button>
           </div>
