@@ -136,10 +136,10 @@ const App = () => {
       if(ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
-        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, MyEpicNft.abi, signer);
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, MyEpicNFT.abi, signer);
 
-        let totalNfts = await connectedContract.getTotalNFTsMinted();
-        setTotalNfts(totalNfts.toNumber())
+        let totalNftsMinted = await connectedContract.getTotalNftsMinted();
+        setTotalNfts(totalNftsMinted.toNumber())
       } 
     }catch(error){
         console.log(error)
